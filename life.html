@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Life</title>
+    <link rel="stylesheet" type="text/css" href="css/life.css" media="screen" />
+    <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+    <script type="text/javascript" src="js/life.js"></script>
+    <script type="text/javascript" src="js/patterns.js"></script>
+  </head>
+  <body>
+    <h1>Conway's Game of Life</h1>
+    <p><a href="http://en.wikipedia.org/wiki/Conway%27s_Game_of_Life">wikipedia</a></p>
+    <div class='board'></div>
+    <div id='iterationNumber'>___</div>
+    <button onclick="stopIterating();">Stop!</button>
+    <h2>Rules</h2>
+    <ol>
+      <li>Any live cell with fewer than two live neighbours dies, as if caused by under-population.</li>
+      <li>Any live cell with two or three live neighbours lives on to the next generation.</li>
+      <li>Any live cell with more than three live neighbours dies, as if by overcrowding.</li>
+      <li>Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.</li>
+    </ol>
+
+    <script>
+      // var startingPattern = loadPatternFromString(superFountain());
+      // var startingPattern = loadPatternFromString(cells101);
+      // var startingPattern = loadPatternFromString(trafficCircle);
+      // var startingPattern = loadPatternFromString(spaceships);
+      var startingPattern = loadPatternFromString(gosperGliderGun);
+
+      buildBoard(50, 50);
+      setInitalStateFromList(startingPattern);
+
+      intervalID = window.setInterval(oneIteration, 10);
+
+      function stopIterating() {
+        window.clearTimeout(intervalID);
+      }
+    </script>
+  </body>
+</html>
