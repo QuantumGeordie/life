@@ -113,11 +113,14 @@ function neighbors(x, y) {
   coordinates.push([x    , y + 1]);
   coordinates.push([x + 1, y + 1]);
 
+  if (true) {
+    for(i = 0; i < coordinates.length; i++){
+      coordinates[i] = sanitizeNeighbors(coordinates[i][0], coordinates[i][1]);
+    }
+  }
+
   // console.log(coordinates);
-
-  // coordinates = sanitizeNeighbors(coordinates);
-
-  var n = Array(8);
+  var n = Array();
 
   for(i = 0; i < coordinates.length; i++){
     n.push(coordinates[i][0] + '_' + coordinates[i][1]);
@@ -126,40 +129,32 @@ function neighbors(x, y) {
   return n;
 }
 
-function sanitizeNeighbors(coords) {
-  var requiredSanitizing = false;
 
-  for(i = 0; i < coords.length; i++){
-    if(coords[i][0] < 0){
-      requiredSanitizing = true;
-      coords[i][0] = numCols - 1;
-      coords[i][1]--;
-    }
+function sanitizeNeighbors(x, y) {
+  var new_x = x;
+  var new_y = y;
 
-    if(coords[i][0] > numCols - 1){
-      requiredSanitizing = true;
-      coords[i][0] = 0;
-      coords[i][1]++;
-    }
-
-    if(coords[i][1] < 0){
-      requiredSanitizing = true;
-      coords[i][1] = numRows - 1;
-      coords[i][0]--;
-    }
-
-    if(coords[i][1] > numRows - 1){
-      requiredSanitizing = true;
-      coords[i][1] = 0;
-      coords[i][0]++;
-    }
-
-    if(requiredSanitizing){
-      coords = sanitizeNeighbors(coords);
-    }
-
-    return coords;
+  if(new_x < 0){
+    new_x = numCols - 1;
+    new_y--;
   }
+
+  if(new_x > numCols - 1){
+    new_x = 0;
+    new_y++;
+  }
+
+  if(new_y < 0){
+    new_y = numRows - 1;
+    new_x--;
+  }
+
+  if(new_y > numRows - 1){
+    new_y = 0;
+    new_x++;
+  }
+
+  return [new_x, new_y];
 
 }
 
@@ -185,21 +180,31 @@ function oneIteration() {
 
   if (!anyChanges) { window.clearTimeout(intervalID); }
 
-  // console.log(iterationNumber);
-  $('#iterationNumber').text(iterationNumber);
+  $('#iterationNumber').text('Iteration: ' + iterationNumber);
 }
 
 function setCellStatus(cellId, status) {
   var currentStatus = currentAlive(cellId);
   var changed = true;
   if (!currentStatus && status)
-    $('#' + cellId).addClass('alive');
+    makeAlive(cellId);
   else if (currentStatus && !status)
-    $('#' + cellId).removeClass('alive');
+    makeDead(cellId);
   else { changed = false; }
 
   return changed;
 }
+
+function makeAlive(cellId){
+  $('#' + cellId).addClass('alive');
+  $('#' + cellId).removeClass('was_dead');
+}
+
+function makeDead(cellId) {
+  $('#' + cellId).removeClass('alive');
+  $('#' + cellId).addClass('was_dead');
+}
+
 
 function determineNewState(isAlive, numAlive) {
   var newState;

@@ -29,6 +29,10 @@ a:active  { text-decoration:none; color: #A3906D; }
   background-color: #ff9933;
 }
 
+.was_dead {
+  background-color: #eee;
+}
+
 .board {
   margin: 20px;
   padding: 3px;
@@ -47,17 +51,24 @@ li {
 
 button {
   transition-duration: 0.3s;
-background: #f18d05;
-color: #ffffff;
-text-shadow: none;
-border: none;
-border-radius: 3px;
-display: inline-block;
-vertical-align: middle;
-border: 1px solid #d4d4d4;
-height: 32px;
-line-height: 30px;
-padding: 0px 25.6px;
-font-weight: 300;
-font-size: 14px;
+  background: #f18d05;
+  color: #ffffff;
+  text-shadow: none;
+  border: none;
+  border-radius: 3px;
+  display: inline-block;
+  vertical-align: middle;
+  border: 1px solid #d4d4d4;
+  height: 32px;
+  line-height: 30px;
+  padding: 0px 25.6px;
+  font-weight: 300;
+  font-size: 14px;
+}
+
+button:enabled {
+  background-color: #f18d05;
+}
+button:disabled {
+  background-color: #D9D9D9;
 }
