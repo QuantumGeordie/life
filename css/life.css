@@ -38,15 +38,16 @@ a:active  { text-decoration:none; color: #A3906D; }
   padding: 3px;
   background-color: #FFFBF5;
   display: inline-block;
+  border: 2px solid #956C1F;
 }
 
 ol, p {
   margin: 20px;
-  max-width: 640px;
 }
 
 li {
-  padding: 0.6em;
+  color: #999;
+  font-size: 0.8em;
 }
 
 button {
@@ -71,4 +72,14 @@ button:enabled {
 }
 button:disabled {
   background-color: #D9D9D9;
+}
+
+.reset_button {
+  height: 22px;
+  line-height: 20px;
+}
+
+input[type="text"] {
+    width: 35px;
+    margin-bottom: 10px;
 }

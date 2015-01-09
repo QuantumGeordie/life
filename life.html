@@ -9,12 +9,24 @@
   </head>
   <body>
     <h1>Conway's Game of Life</h1>
-    <p><a href="http://en.wikipedia.org/wiki/Conway%27s_Game_of_Life">wikipedia</a></p>
+    <p>
+      board dimensions: <input type="text" id='x_dimension' value='75'> x <input type="text" id='y_dimension' value='30'> <button class='reset_button' onclick="resetBoard();">reset board</button>
+        <select name="patternName" id='pattern_name'>
+          <option value="Gosper Glider Gun" selected>Gosper Glider Gun</option>
+          <option value="Super Fountain">Super Fountain</option>
+          <option value="Cells 101">Cells 101</option>
+          <option value="Traffic Circle">Traffic Circle</option>
+          <option value="Spaceships">Spaceships</option>
+      </select>
+    </p>
     <div class='board'></div>
-    <div id='iterationNumber'>Iteration: ____</div>
-    <button id='start_button' onclick="startIterating();">Start</button>
-    <button id='stop_button' onclick="stopIterating();" disabled=true>Stop</button>
+    <p>
+      <button id='start_button' onclick="startIterating();">Start</button>
+      <button id='stop_button' onclick="stopIterating();" disabled=true>Stop</button>
+    </p>
+    <p><span id='iterationNumber'>Iteration: ____</span></p>
     <h2>Rules</h2>
+    <p><a href="http://en.wikipedia.org/wiki/Conway%27s_Game_of_Life">wikipedia</a></p>
     <ol>
       <li>Any live cell with fewer than two live neighbours dies, as if caused by under-population.</li>
       <li>Any live cell with two or three live neighbours lives on to the next generation.</li>
@@ -23,14 +35,25 @@
     </ol>
 
     <script>
+
       // var startingPattern = loadPatternFromString(superFountain());
       // var startingPattern = loadPatternFromString(cells101);
       // var startingPattern = loadPatternFromString(trafficCircle);
       // var startingPattern = loadPatternFromString(spaceships);
-      var startingPattern = loadPatternFromString(gosperGliderGun);
+      // var startingPattern = loadPatternFromString(gosperGliderGun);
 
-      buildBoard(60, 25);
-      setInitalStateFromList(startingPattern);
+      resetBoard();
+
+      function resetBoard() {
+        var x_dimension = $('#x_dimension').val();
+        var y_dimension = $('#y_dimension').val();
+
+        buildBoard(x_dimension, y_dimension);
+
+        var patternName = $('#pattern_name').val();
+
+        setInitalStateFromList(loadPatternFromName(patternName));
+      }
 
       function startIterating() {
         $('#start_button').prop("disabled", true);

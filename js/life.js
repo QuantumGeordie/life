@@ -4,22 +4,27 @@ var numRows
   , currentStats;
 
 function buildBoard(x, y) {
-    var board = $('.board');
-    for (var j = 0; j < y; j++) {
-      var row = $("<div class='row'></div>");
-      for (var i = 0; i < x; i++) {
-        var cell = $('<div></div>')
-          .addClass('cell')
-          .attr('id', i + '_' + j);
+  clearBoard();
+  var board = $('.board');
+  for (var j = 0; j < y; j++) {
+    var row = $("<div class='row'></div>");
+    for (var i = 0; i < x; i++) {
+      var cell = $('<div></div>')
+        .addClass('cell')
+        .attr('id', i + '_' + j);
 
-          cell.appendTo(row);
-      };
-      board.append(row);
+        cell.appendTo(row);
     };
+    board.append(row);
+  };
 
-    numRows = y;
-    numCols = x;
-    iterationNumber = 0;
+  numRows = y;
+  numCols = x;
+  iterationNumber = 0;
+}
+
+function clearBoard() {
+  $( ".row" ).empty();
 }
 
 function setInitalStateFromList(list) {
