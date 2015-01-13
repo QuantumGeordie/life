@@ -7,6 +7,7 @@
     <script type="text/javascript" src="js/life.js"></script>
     <script type="text/javascript" src="js/patterns.js"></script>
     <script type="text/javascript" src="js/patternLoader.js"></script>
+    <script type="text/javascript" src="js/board.js"></script>
 
   </head>
   <body>
@@ -42,14 +43,10 @@
       resetBoard();
 
       function resetBoard() {
-        var x_dimension = $('#x_dimension').val();
-        var y_dimension = $('#y_dimension').val();
-
-        buildBoard(x_dimension, y_dimension);
-
         var patternName = $('#pattern_name').val();
+        var initialCells = patternLoader.loadPatternFromName(patternName);
 
-        setInitalStateFromList(patternLoader.loadPatternFromName(patternName));
+        board.reset(initialCells);
       }
 
       function startIterating() {

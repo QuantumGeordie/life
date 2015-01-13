@@ -3,64 +3,6 @@ var numRows
   , iterationNumber
   , currentStats;
 
-function buildBoard(x, y) {
-  clearBoard();
-  var board = $('.board');
-  for (var j = 0; j < y; j++) {
-    var row = $("<div class='row'></div>");
-    for (var i = 0; i < x; i++) {
-      var cell = $('<div></div>')
-        .addClass('cell')
-        .attr('id', i + '_' + j);
-
-        cell.appendTo(row);
-    };
-    board.append(row);
-  };
-
-  numRows = y;
-  numCols = x;
-  iterationNumber = 0;
-}
-
-function clearBoard() {
-  $( ".row" ).empty();
-}
-
-function setInitalStateFromList(list) {
-  for (index = 0; index < list.length; ++index) {
-      $('#' + list[index]).addClass('alive');
-  }
-}
-
-function setInitialState() {
-  var rows = $('.row').length;
-  var cols = $('.row')[0].children.length;
-  var x0 = Math.floor( cols / 2  - 1 );
-  var y0 = Math.floor( rows / 2  );
-
-  cells = Array();
-
-  cells.push(x0 + '_' + y0);
-
-  y0++;
-  x0--;
-  cells.push(x0 + '_' + y0);
-
-  y0++;
-  cells.push(x0 + '_' + y0);
-
-  x0++;
-  cells.push(x0 + '_' + y0);
-
-  x0++;
-  cells.push(x0 + '_' + y0);
-
-  for (index = 0; index < cells.length; ++index) {
-      $('#' + cells[index]).addClass('alive');
-  }
-}
-
 function compileCurrentState() {
   var allStates = Array(numRows);
 
@@ -132,7 +74,6 @@ function neighbors(x, y) {
 
   return n;
 }
-
 
 function sanitizeNeighbors(x, y) {
   var new_x = x;
