@@ -124,7 +124,6 @@ function neighbors(x, y) {
     }
   }
 
-  // console.log(coordinates);
   var n = Array();
 
   for(i = 0; i < coordinates.length; i++){
@@ -169,10 +168,6 @@ function oneIteration() {
   var currentNumbers = compileCurrentNumbers();
 
   var anyChanges = false;
-  // console.log('currentStates');
-  // console.log(currentStates);
-  // console.log('currentNumbers');
-  // console.log(currentNumbers);
 
   var newState = currentNumbers;
   for(x = 0; x < currentNumbers.length; x++){
@@ -200,7 +195,7 @@ function setCellStatus(cellId, status) {
   return changed;
 }
 
-function makeAlive(cellId){
+function makeAlive(cellId) {
   $('#' + cellId).addClass('alive');
   $('#' + cellId).removeClass('was_dead');
 }
